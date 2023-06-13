@@ -36,6 +36,10 @@ scripts:
     run: melos check-format && melos analyze && melos test
     failFast: true
 
+  git-check:
+    run: bash scripts/git-check.sh
+    description: Check if some code changed during build
+
 command:
   clean:
     hooks:
