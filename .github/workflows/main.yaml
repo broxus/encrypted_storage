@@ -6,20 +6,45 @@ concurrency:
 
 on:
   pull_request:
+  push:
     branches:
       - main
+  schedule:
+    # runs the CI everyday at 6AM
+    - cron: "0 6 * * *"
 
 jobs:
   semantic_pull_request:
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/semantic_pull_request.yml@v1
 
-  spell-check:
-    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/spell_check.yml@v1
-    with:
-      includes: "**/*.md"
-      modified_files_only: false
+  build_and_test:
+    runs-on: ubuntu-latest
 
-  build:
-    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1
-    with:
-      flutter_channel: stable
+    steps:
+      # Setup
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.10.4'
+          channel: 'stable'
+          cache: true
+          cache-key: flutter-:os:-:channel:-:version:-:arch:-:hash:-${{ hashFiles('**/pubspec.lock') }}
+      - uses: bluefireteam/melos-action@v2
+
+      - name: Clean before check-format
+        run: melos clean
+
+      - name: Boostrap everything
+        run: melos bs
+
+      - name: Generate dart code
+        run: melos run codegen --no-select
+
+      - name: Dart code analysis
+        run: melos run check-all --no-select
+
+      - name: Run Dart tests
+        run: melos run test --no-select
+
+      - name: Check git diff
+        run: melos git-check
