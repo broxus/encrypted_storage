@@ -1,10 +1,10 @@
 # Encrypted Storage
 
 [![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
-[![Powered by Mason](https://img.shields.io/endpoint?url=https%3A%2F%2Ftinyurl.com%2Fmason-badge)](https://github.com/felangel/mason)
 [![License: MIT][license_badge]][license_link]
+[![app](https://github.com/broxus/encrypted_storage/actions/workflows/main.yaml/badge.svg)](https://github.com/broxus/encrypted_storage/actions/workflows/main.yaml)
 
-Encrypted storage
+Flutter encrypted storage implementation
 
 ## Installation 💻
 
@@ -25,50 +25,81 @@ flutter packages get
 
 ---
 
-## Continuous Integration 🤖
+## Getting Started 🚀
 
-Encrypted Storage comes with a built-in [GitHub Actions workflow][github_actions_link] powered by [Very Good Workflows][very_good_workflows_link] but you can also add your preferred CI/CD solution.
+Install melos:
 
-Out of the box, on each pull request and push, the CI `formats`, `lints`, and `tests` the code. This ensures the code remains consistent and behaves correctly as you add functionality or make changes. The project uses [Very Good Analysis][very_good_analysis_link] for a strict set of analysis options used by our team. Code coverage is enforced using the [Very Good Workflows][very_good_coverage_link].
+```sh
+$ dart pub global activate melos
+```
 
----
+Using [melos](https://melos.invertase.dev/) makes it very easy to work with the project, so enjoy.
+
+Boostrap packages recursively:
+
+```sh
+$ melos bs
+```
+
+## Codegen 🦾
+
+This thing will run all code generators for all packages:
+
+```
+$ melos run codegen
+```
+
+## Code format checking and analyser 🦠
+
+```
+$ melos run check-format
+$ melos run analyze
+```
+
+## Clean up 🧹
+
+To clean up all packages just run:
+
+```
+$ melos clean
+```
 
 ## Running Tests 🧪
 
-For first time users, install the [very_good_cli][very_good_cli_link]:
+To run all unit and widget tests use the following command:
 
 ```sh
-dart pub global activate very_good_cli
+$ melos test
 ```
 
-To run all unit tests:
+## Pre-commit preparation 🦠🧪🤏
+
+To run code format check, analyzer and all tests use the following command:
 
 ```sh
-very_good test --coverage
+$ melos check-all
 ```
 
-To view the generated coverage report you can use [lcov](https://github.com/linux-test-project/lcov).
+## Package version 🔢
+
+Package version is defined in `pubspec.yaml` file. To bump the version use the following command:
 
 ```sh
-# Generate Coverage Report
-genhtml coverage/lcov.info -o coverage/
+# For development releases:
+$ melos version -a --yes --prerelease
 
-# Open Coverage Report
-open coverage/index.html
+# For production releases:
+$ melos version -a --yes --graduate
 ```
+
+You can use version workflow in GitHub actions to bump the version automatically. This workflow will create a new branch and PR (because push to main is prohibited) with the new version. Don't forget to merge the PR to main! Note: you should use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) to make it work.
+
+## Github Secrets 🔑
+
+`BOT_ACCESS_TOKEN`: Personal access token (PAT) used to fetch the repository. We should use PAT and not default GITHUB_TOKEN because ["When you use the repository's GITHUB_TOKEN to perform tasks, events triggered by the GITHUB_TOKEN, with the exception of workflow_dispatch and repository_dispatch, will not create a new workflow run"](https://docs.github.com/en/actions/using-workflows/triggering-a-workflow#triggering-a-workflow-from-a-workflow). We want to trigger a workflow from the workflow (to run tests), so we need to use PAT. This thing is used in `version` workflow.
 
 [flutter_install_link]: https://docs.flutter.dev/get-started/install
-[github_actions_link]: https://docs.github.com/en/actions/learn-github-actions
 [license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
 [license_link]: https://opensource.org/licenses/MIT
-[logo_black]: https://raw.githubusercontent.com/VGVentures/very_good_brand/main/styles/README/vgv_logo_black.png#gh-light-mode-only
-[logo_white]: https://raw.githubusercontent.com/VGVentures/very_good_brand/main/styles/README/vgv_logo_white.png#gh-dark-mode-only
-[mason_link]: https://github.com/felangel/mason
 [very_good_analysis_badge]: https://img.shields.io/badge/style-very_good_analysis-B22C89.svg
 [very_good_analysis_link]: https://pub.dev/packages/very_good_analysis
-[very_good_cli_link]: https://pub.dev/packages/very_good_cli
-[very_good_coverage_link]: https://github.com/marketplace/actions/very-good-coverage
-[very_good_ventures_link]: https://verygood.ventures
-[very_good_ventures_link_light]: https://verygood.ventures#gh-light-mode-only
-[very_good_ventures_link_dark]: https://verygood.ventures#gh-dark-mode-only
-[very_good_workflows_link]: https://github.com/VeryGoodOpenSource/very_good_workflows
