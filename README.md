@@ -4,7 +4,7 @@
 [![License: MIT][license_badge]][license_link]
 [![app](https://github.com/broxus/encrypted_storage/actions/workflows/main.yaml/badge.svg)](https://github.com/broxus/encrypted_storage/actions/workflows/main.yaml)
 
-This package provides a fast and simple way to store and retrieve encrypted data usind [sqflite][sqflite_link]. It uses AES encryption via [encrypt][encrypt_link] the data and [flutter_secure_storage][flutter_secure_storage_link] to store key and initialization vector.
+This package provides a fast and simple way to store and retrieve encrypted data usind [sqflite][sqflite_link]. It uses AES encryption via [encrypt][encrypt_link] to encrypt the data and [flutter_secure_storage][flutter_secure_storage_link] to store key and initialization vector.
 
 ## Installation 💻
 
