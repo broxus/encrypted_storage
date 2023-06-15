@@ -1,4 +1,4 @@
-name: Version
+name: Create version PR
 
 on:
   # Allows you to run this workflow manually from the Actions tab

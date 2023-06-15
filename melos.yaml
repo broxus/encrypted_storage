@@ -44,3 +44,7 @@ command:
   clean:
     hooks:
       post: bash scripts/clean.sh
+
+  version:
+    hooks:
+      preCommit: melos bs && git add --all

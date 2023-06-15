@@ -1,7 +1,7 @@
 name: encrypted_storage
 description: Encrypted storage
 version: 0.1.0+1
-publish_to: none
+repository: https://github.com/broxus/encrypted_storage
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -13,7 +13,7 @@ dependencies:
     sdk: flutter
   flutter_secure_storage: ^8.0.0
   injectable: ^2.1.1
-  logging: 1.1.1
+  logging: ^1.1.1
   path: ^1.8.2
   sqflite: ^2.2.6
 

@@ -1,32 +1,28 @@
-name: Publish
+name: Publish package
 
 on:
-  pull_request:
-    types: [closed]
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+*'
 
 jobs:
-  publish_release:
-    if: github.event.pull_request.merged && github.head_ref == 'version-bump'
+  publish_gh:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
 
-      - name: Read version
-        id: yaml_data
-        uses: jbutcher5/read-yaml@main
-        with:
-          file: './pubspec.yaml'
-          key-path: '["version"]'
-
-      - name: Push tag
-        id: tag_version
-        uses: mathieudutour/github-tag-action@v6.1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          custom_tag: ${{ steps.yaml_data.outputs.data }}
-
       - name: Create GitHub release
         uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ steps.tag_version.outputs.new_tag }}
+
+  publish_pubdev:
+    permissions:
+      id-token: write # This is required for authentication using OIDC
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dart-lang/setup-dart@v1
+      - uses: subosito/flutter-action@v2
+      
+      - name: Publish
+        run: flutter pub publish --force
