@@ -4,7 +4,7 @@
 [![License: MIT][license_badge]][license_link]
 [![app](https://github.com/broxus/encrypted_storage/actions/workflows/main.yaml/badge.svg)](https://github.com/broxus/encrypted_storage/actions/workflows/main.yaml)
 
-Flutter encrypted storage implementation
+This package provides a fast and simple way to store and retrieve encrypted data usind [sqflite][sqflite_link]. It uses AES encryption via [encrypt][encrypt_link] the data and [flutter_secure_storage][flutter_secure_storage_link] to store key and initialization vector.
 
 ## Installation 💻
 
@@ -103,3 +103,6 @@ You can use version workflow in GitHub actions to bump the version automatically
 [license_link]: https://opensource.org/licenses/MIT
 [very_good_analysis_badge]: https://img.shields.io/badge/style-very_good_analysis-B22C89.svg
 [very_good_analysis_link]: https://pub.dev/packages/very_good_analysis
+[flutter_secure_storage_link]: https://pub.dev/packages/flutter_secure_storage
+[sqflite_link]: https://pub.dev/packages/sqflite
+[encrypt_link]: https://pub.dev/packages/encrypt
