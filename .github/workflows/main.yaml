@@ -37,13 +37,16 @@ jobs:
       - name: Boostrap everything
         run: melos bs
 
+      - name: Check Dart format
+        run: melos run check-format --no-select
+
       - name: Generate dart code
-        run: melos run codegen --no-select
+        run: melos codegen --no-select
 
       - name: Dart code analysis
-        run: melos run check-all --no-select
+        run: melos run analyze --no-select
 
-      - name: Run Dart tests
+      - name: Run Flutter tests
         run: melos run test --no-select
 
       - name: Check git diff

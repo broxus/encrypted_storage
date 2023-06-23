@@ -25,7 +25,7 @@ scripts:
 
   test:
     description: Run Flutter tests for a specific package in this project.
-    exec: "flutter test test"
+    exec: "flutter test -j 1 test"
     failFast: true
     packageFilters:
       flutter: true
