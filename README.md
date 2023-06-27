@@ -23,6 +23,28 @@ Install it:
 flutter packages get
 ```
 
+## Basic usage 🛠
+
+Setup DI:
+
+```dart
+@InjectableInit(  
+  externalPackageModulesBefore: [
+    ExternalModule(EncryptedStoragePackageModule),
+  ],
+)  
+void configureDependencies() => getIt.init();  
+```
+
+Init:
+
+```dart
+Future<void> configureEncryptedStorage() async {
+  final encryptedStorage = inject<EncryptedStorage>();
+  await encryptedStorage.init();
+}
+```
+
 ---
 
 ## Getting Started 🚀
