@@ -1,7 +1,7 @@
 # Encrypted Storage
 
 [![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
-[![License: MIT][license_badge]][license_link]
+[![License: AGPLv3][license_badge]][license_link]
 [![app](https://github.com/broxus/encrypted_storage/actions/workflows/main.yaml/badge.svg)](https://github.com/broxus/encrypted_storage/actions/workflows/main.yaml)
 
 This package provides a fast and simple way to store and retrieve encrypted data usind [sqflite][sqflite_link]. It uses AES encryption via [encrypt][encrypt_link] to encrypt the data and [flutter_secure_storage][flutter_secure_storage_link] to store key and initialization vector.
@@ -21,6 +21,28 @@ Install it:
 
 ```sh
 flutter packages get
+```
+
+## Basic usage 🛠
+
+Setup DI:
+
+```dart
+@InjectableInit(  
+  externalPackageModulesBefore: [
+    ExternalModule(EncryptedStoragePackageModule),
+  ],
+)  
+void configureDependencies() => getIt.init();  
+```
+
+Init:
+
+```dart
+Future<void> configureEncryptedStorage() async {
+  final encryptedStorage = inject<EncryptedStorage>();
+  await encryptedStorage.init();
+}
 ```
 
 ---
@@ -99,8 +121,8 @@ You can use version workflow in GitHub actions to bump the version automatically
 `BOT_ACCESS_TOKEN`: Personal access token (PAT) used to fetch the repository. We should use PAT and not default GITHUB_TOKEN because ["When you use the repository's GITHUB_TOKEN to perform tasks, events triggered by the GITHUB_TOKEN, with the exception of workflow_dispatch and repository_dispatch, will not create a new workflow run"](https://docs.github.com/en/actions/using-workflows/triggering-a-workflow#triggering-a-workflow-from-a-workflow). We want to trigger a workflow from the workflow (to run tests), so we need to use PAT. This thing is used in `version` workflow.
 
 [flutter_install_link]: https://docs.flutter.dev/get-started/install
-[license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
-[license_link]: https://opensource.org/licenses/MIT
+[license_badge]: https://img.shields.io/badge/license-AGPLv3-blue.svg
+[license_link]: https://opensource.org/license/agpl-v3/
 [very_good_analysis_badge]: https://img.shields.io/badge/style-very_good_analysis-B22C89.svg
 [very_good_analysis_link]: https://pub.dev/packages/very_good_analysis
 [flutter_secure_storage_link]: https://pub.dev/packages/flutter_secure_storage
