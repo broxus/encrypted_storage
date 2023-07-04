@@ -10,17 +10,11 @@ This package provides a fast and simple way to store and retrieve encrypted data
 
 **❗ In order to start using Encrypted Storage you must have the [Flutter SDK][flutter_install_link] installed on your machine.**
 
-Add `encrypted_storage` to your `pubspec.yaml`:
+Add [encrypted_storage][pubdev_link] to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
   encrypted_storage:
-```
-
-Install it:
-
-```sh
-flutter packages get
 ```
 
 ## Basic usage 🛠
@@ -45,25 +39,21 @@ Future<void> configureEncryptedStorage() async {
 }
 ```
 
----
-
-## Getting Started 🚀
-
-Install melos:
-
-```sh
-$ dart pub global activate melos
-```
+## Melos magic 🪄
 
 Using [melos](https://melos.invertase.dev/) makes it very easy to work with the project, so enjoy.
 
-Boostrap packages recursively:
+You can run any job interactively run running `melos run` and selecting needed case or directly (e.g. `melos run test`).
 
-```sh
-$ melos bs
+### Bootstrap 🏁
+
+Melos takes care about dependencies of all packages, including managing of local-generated library version. So, just run:
+
+```
+melos bs
 ```
 
-## Codegen 🦾
+### Codegen 🦾
 
 This thing will run all code generators for all packages:
 
@@ -71,50 +61,54 @@ This thing will run all code generators for all packages:
 $ melos run codegen
 ```
 
-## Code format checking and analyser 🦠
+### Clean up 🧹
+
+Just run commands below to clean all, including build directories and flutter projects.
 
 ```
-$ melos run check-format
-$ melos run analyze
+melos clean
 ```
 
-## Clean up 🧹
+### Tests ✔️
 
-To clean up all packages just run:
+You can run all tests at one by running this command.
 
 ```
-$ melos clean
+melos run test
 ```
 
-## Running Tests 🧪
+### Code 📊
 
-To run all unit and widget tests use the following command:
+You can run code analysis:
 
-```sh
-$ melos test
+```
+melos run analyze
 ```
 
-## Pre-commit preparation 🦠🧪🤏
+### Code format 🗃️
 
-To run code format check, analyzer and all tests use the following command:
+`melos run check-format` will check, `melos run format` will fix dart code formatting.
 
-```sh
-$ melos check-all
+```
+melos run check-format
+melos run format
 ```
 
-## Package version 🔢
+### Prepare to commit 🤝🏻
 
-Package version is defined in `pubspec.yaml` file. To bump the version use the following command:
+`melos run check-all` will ckeck, analyze and run all tests.
 
-```sh
-# For development releases:
-$ melos version -a --yes --prerelease
-
-# For production releases:
-$ melos version -a --yes --graduate
+```
+melos run check-all
 ```
 
-You can use version workflow in GitHub actions to bump the version automatically. This workflow will create a new branch and PR (because push to main is prohibited) with the new version. Don't forget to merge the PR to main! Note: you should use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) to make it work.
+## Conventional Commits ❤️
+
+[This magic](https://melos.invertase.dev/guides/automated-releases#versioning) will update version and build our library automatically using commit messages and tags. [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0) is a lightweight convention on top of commit messages.
+
+## Version 🏷️
+
+Package version control is done by melos. It runs by gh action 'Create version PR' ```melos version -a --yes```.
 
 ## Github Secrets 🔑
 
@@ -128,3 +122,4 @@ You can use version workflow in GitHub actions to bump the version automatically
 [flutter_secure_storage_link]: https://pub.dev/packages/flutter_secure_storage
 [sqflite_link]: https://pub.dev/packages/sqflite
 [encrypt_link]: https://pub.dev/packages/encrypt
+[pubdev_link]: https://pub.dev/packages/encrypted_storage
