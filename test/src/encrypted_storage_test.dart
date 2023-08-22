@@ -9,17 +9,17 @@ import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 const String testDomainName0 = 'test domain name 0';
 final Map<String, String> testKeyValuePairs0 = {
   for (var id in List<int>.generate(256, (index) => index))
-    'key 0: $id': 'value: 0: $id'
+    'key 0: $id': 'value: 0: $id',
 };
 
 final Map<String, String> testKeyValuePairs0Update = {
   for (var id in List<int>.generate(256, (index) => index))
-    'key 0: $id': 'value: 0: $id update'
+    'key 0: $id': 'value: 0: $id update',
 };
 
 final Map<String, String> testKeyValuePairs1 = {
   for (var id in List<int>.generate(128, (index) => index))
-    'key 1: $id': 'value: 0: $id'
+    'key 1: $id': 'value: 0: $id',
 };
 
 void main() {

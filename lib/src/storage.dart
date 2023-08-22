@@ -232,7 +232,7 @@ class Storage {
     return {
       // There is no way to write null in these fields
       // ignore: cast_nullable_to_non_nullable
-      for (var pair in list)
+      for (final pair in list)
         pair['key']! as String: StorageValue(
           pair['value']! as String,
           pair['iv']! as String,
@@ -253,7 +253,7 @@ class Storage {
     return [
       // There is no way to write null in these fields
       // ignore: cast_nullable_to_non_nullable
-      for (var pair in list) pair['key']! as String,
+      for (final pair in list) pair['key']! as String,
     ];
   }
 }
