@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-08-30
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`encrypted_storage` - `v0.1.2`](#encrypted_storage---v012)
+
+---
+
+#### `encrypted_storage` - `v0.1.2`
+
+ - **FIX**: flutter test concurrency (#6).
+ - **FEAT**: use flutter templates repository (#9).
+ - **DOCS**: add package description (#3).
+
+## 0.1.2
+
+ - **FIX**: flutter test concurrency (#6).
+ - **FEAT**: use flutter templates repository (#9).
+ - **DOCS**: add package description (#3).
+
+
 ## 2023-08-22
 
 ### Changes
