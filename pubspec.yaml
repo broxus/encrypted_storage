@@ -1,34 +1,33 @@
 name: encrypted_storage
 description: Encrypted storage
-version: 0.1.2
+version: 0.1.3
 repository: https://github.com/broxus/encrypted_storage
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
-  collection: ^1.17.0
-  encrypt: ^5.0.1
+  collection: ^1.18.0
+  encrypt: ^5.0.3
   flutter:
     sdk: flutter
   flutter_secure_storage: ^9.0.0
-  injectable: ^2.1.1
-  logging: ^1.1.1
-  path: ^1.8.2
-  sqflite: ^2.2.6
+  injectable: ^2.4.1
+  logging: ^1.2.0
+  path: ^1.9.0
+  sqflite: ^2.3.3+1
 
 dev_dependencies:
   broxus_flutter_analysis:
     git:
       url: https://github.com/broxus/flutter_templates.git
       ref: broxus_flutter_analysis-v1.0.0
-  build_runner: ^2.4.5
-  dart_code_metrics: ^5.6.0
+  build_runner: ^2.4.9
   flutter_test:
     sdk: flutter
-  injectable_generator: ^2.1.5
-  melos: ^3.1.0
-  mocktail: ^1.0.0
-  path_provider_platform_interface: ^2.0.6
-  plugin_platform_interface: ^2.1.4
-  sqflite_common_ffi: ^2.2.2
+  injectable_generator: ^2.6.1
+  melos: ^6.0.0
+  mocktail: ^1.0.3
+  path_provider_platform_interface: ^2.1.2
+  plugin_platform_interface: ^2.1.8
+  sqflite_common_ffi: ^2.3.3
