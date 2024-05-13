@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-05-09
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+- There are no breaking changes in this release.
+
+Packages with other changes:
+
+- [`encrypted_storage` - `v0.1.3`](#encrypted_storage---v013)
+
+---
+
+#### `encrypted_storage` - `v0.1.3`
+
+- **FEAT**: updating dependency package versions.
+
+## 0.1.3
+
+- **FEAT**: updating dependency package versions.
+
 ## 2023-08-30
 
 ### Changes
