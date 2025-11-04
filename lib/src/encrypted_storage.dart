@@ -10,9 +10,7 @@ import 'package:injectable/injectable.dart';
 @singleton
 class EncryptedStorage implements AbstractStorage {
   /// {@macro encrypted_storage}
-  EncryptedStorage()
-      : _storage = Storage(),
-        _cipherStorage = CipherStorage();
+  EncryptedStorage() : _storage = Storage(), _cipherStorage = CipherStorage();
 
   final CipherStorage _cipherStorage;
   late EncryptHelper _encryptHelper;
@@ -22,10 +20,7 @@ class EncryptedStorage implements AbstractStorage {
 
   /// Init encrypted storage
   Future<void> init([String dbName = _storageFileName]) async {
-    await Future.wait([
-      _cipherStorage.init(),
-      _storage.init(dbName),
-    ]);
+    await Future.wait([_cipherStorage.init(), _storage.init(dbName)]);
     _encryptHelper = EncryptHelper(_cipherStorage);
   }
 
@@ -83,9 +78,7 @@ class EncryptedStorage implements AbstractStorage {
 
   @override
   Future<Map<String, String>> getDomain({String domain = defaultDomain}) async {
-    final pairs = await _storage.getDomain(
-      domain: domain,
-    );
+    final pairs = await _storage.getDomain(domain: domain);
 
     return pairs.map(
       (key, value) => MapEntry(
@@ -96,12 +89,8 @@ class EncryptedStorage implements AbstractStorage {
   }
 
   @override
-  Future<List<String>> getDomainKeys({
-    String domain = defaultDomain,
-  }) async {
-    final keys = await _storage.getDomainKeys(
-      domain: domain,
-    );
+  Future<List<String>> getDomainKeys({String domain = defaultDomain}) async {
+    final keys = await _storage.getDomainKeys(domain: domain);
 
     return keys.map((key) => _encryptHelper.decrypt(key)).toList();
   }
@@ -128,17 +117,16 @@ class EncryptedStorage implements AbstractStorage {
     Map<String, String> pairs, {
     String domain = defaultDomain,
     bool overwrite = true,
-  }) =>
-      _storage.setDomain(
-        pairs.map((key, value) {
-          final iv = CipherStorage.ivFromSecureRandom().base64;
+  }) => _storage.setDomain(
+    pairs.map((key, value) {
+      final iv = CipherStorage.ivFromSecureRandom().base64;
 
-          return MapEntry(
-            _encryptHelper.encrypt(key),
-            StorageValue(_encryptHelper.encrypt(value, iv), iv),
-          );
-        }),
-        domain: domain,
-        overwrite: overwrite,
+      return MapEntry(
+        _encryptHelper.encrypt(key),
+        StorageValue(_encryptHelper.encrypt(value, iv), iv),
       );
+    }),
+    domain: domain,
+    overwrite: overwrite,
+  );
 }

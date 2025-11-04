@@ -181,10 +181,7 @@ void main() {
       expect(await storage.getDomainKeys(), isEmpty);
 
       await storage.setDomain(testKeyValuePairs0);
-      expect(
-        await storage.getDomain(),
-        hasLength(testKeyValuePairs0.length),
-      );
+      expect(await storage.getDomain(), hasLength(testKeyValuePairs0.length));
       expect(
         await storage.getDomainKeys(),
         hasLength(testKeyValuePairs0.length),
@@ -211,73 +208,62 @@ void main() {
       expect(await storage.getDomain(), testKeyValuePairs0Update);
     });
 
-    test('multiple pairs set, NOT update and check in default domain',
-        () async {
-      final storage = EncryptedStorage();
-      await storage.init();
-      await storage.clearAll();
-      expect(await storage.getDomain(), isEmpty);
+    test(
+      'multiple pairs set, NOT update and check in default domain',
+      () async {
+        final storage = EncryptedStorage();
+        await storage.init();
+        await storage.clearAll();
+        expect(await storage.getDomain(), isEmpty);
 
-      await storage.setDomain(testKeyValuePairs0);
-      await storage.setDomain(testKeyValuePairs0Update, overwrite: false);
-      expect(await storage.getDomain(), hasLength(testKeyValuePairs0.length));
-      expect(await storage.getDomain(), testKeyValuePairs0);
-    });
+        await storage.setDomain(testKeyValuePairs0);
+        await storage.setDomain(testKeyValuePairs0Update, overwrite: false);
+        expect(await storage.getDomain(), hasLength(testKeyValuePairs0.length));
+        expect(await storage.getDomain(), testKeyValuePairs0);
+      },
+    );
 
-    test('multiple pairs set, update, append and check in default domain',
-        () async {
-      final storage = EncryptedStorage();
-      await storage.init();
-      await storage.clearAll();
-      expect(await storage.getDomain(), isEmpty);
+    test(
+      'multiple pairs set, update, append and check in default domain',
+      () async {
+        final storage = EncryptedStorage();
+        await storage.init();
+        await storage.clearAll();
+        expect(await storage.getDomain(), isEmpty);
 
-      await storage.setDomain(testKeyValuePairs0);
-      await storage.setDomain(testKeyValuePairs0Update);
-      await storage.setDomain(testKeyValuePairs1);
-      expect(
-        await storage.getDomain(),
-        hasLength(
-          testKeyValuePairs0.length + testKeyValuePairs1.length,
-        ),
-      );
-      expect(
-        await storage.getDomain(),
-        {
+        await storage.setDomain(testKeyValuePairs0);
+        await storage.setDomain(testKeyValuePairs0Update);
+        await storage.setDomain(testKeyValuePairs1);
+        expect(
+          await storage.getDomain(),
+          hasLength(testKeyValuePairs0.length + testKeyValuePairs1.length),
+        );
+        expect(await storage.getDomain(), {
           ...testKeyValuePairs0Update,
           ...testKeyValuePairs1,
-        },
-      );
-    });
+        });
+      },
+    );
 
-    test('multiple pairs set, append and partially delete in default domain',
-        () async {
-      final storage = EncryptedStorage();
-      await storage.init();
-      await storage.clearAll();
-      expect(await storage.getDomain(), isEmpty);
+    test(
+      'multiple pairs set, append and partially delete in default domain',
+      () async {
+        final storage = EncryptedStorage();
+        await storage.init();
+        await storage.clearAll();
+        expect(await storage.getDomain(), isEmpty);
 
-      await storage.setDomain(testKeyValuePairs0);
-      await storage.setDomain(testKeyValuePairs1);
-      expect(
-        await storage.getDomain(),
-        hasLength(
-          testKeyValuePairs0.length + testKeyValuePairs1.length,
-        ),
-      );
-      await storage.deleteDomain(List.from(testKeyValuePairs0.keys));
-      expect(
-        await storage.getDomain(),
-        hasLength(
-          testKeyValuePairs1.length,
-        ),
-      );
-      expect(
-        await storage.getDomain(),
-        {
-          ...testKeyValuePairs1,
-        },
-      );
-    });
+        await storage.setDomain(testKeyValuePairs0);
+        await storage.setDomain(testKeyValuePairs1);
+        expect(
+          await storage.getDomain(),
+          hasLength(testKeyValuePairs0.length + testKeyValuePairs1.length),
+        );
+        await storage.deleteDomain(List.from(testKeyValuePairs0.keys));
+        expect(await storage.getDomain(), hasLength(testKeyValuePairs1.length));
+        expect(await storage.getDomain(), {...testKeyValuePairs1});
+      },
+    );
   });
 
   group('EncryptedStorage multiple init/reset', () {
@@ -288,25 +274,19 @@ void main() {
       await EncryptedStorage().reset();
     });
 
-    test(
-      'run #0',
-      () async {
-        final storage = EncryptedStorage();
-        await storage.init();
+    test('run #0', () async {
+      final storage = EncryptedStorage();
+      await storage.init();
 
-        await storage.set('testKey', 'testValue');
-        expect(await storage.get('testKey'), 'testValue');
-      },
-    );
+      await storage.set('testKey', 'testValue');
+      expect(await storage.get('testKey'), 'testValue');
+    });
 
-    test(
-      'run #1',
-      () async {
-        final storage = EncryptedStorage();
-        await storage.init();
+    test('run #1', () async {
+      final storage = EncryptedStorage();
+      await storage.init();
 
-        expect(await storage.getDomain(), isEmpty);
-      },
-    );
+      expect(await storage.getDomain(), isEmpty);
+    });
   });
 }

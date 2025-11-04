@@ -21,12 +21,10 @@ void main() {
     });
 
     test('stored creds test', () async {
-      FlutterSecureStorage.setMockInitialValues(
-        {
-          'cipher_storage_key': cipherStorageKey,
-          'cipher_storage_iv': cipherStorageIv,
-        },
-      );
+      FlutterSecureStorage.setMockInitialValues({
+        'cipher_storage_key': cipherStorageKey,
+        'cipher_storage_iv': cipherStorageIv,
+      });
       final cipherStorage = CipherStorage();
       await cipherStorage.init();
       expect(cipherStorage.key.base64, cipherStorageKey);
@@ -51,22 +49,18 @@ void main() {
     });
 
     test('storage persistence test, lost key', () async {
-      FlutterSecureStorage.setMockInitialValues(
-        {
-          'cipher_storage_iv': cipherStorageIv,
-        },
-      );
+      FlutterSecureStorage.setMockInitialValues({
+        'cipher_storage_iv': cipherStorageIv,
+      });
 
       final cipherStorage = CipherStorage();
       await expectLater(cipherStorage.init, throwsStateError);
     });
 
     test('storage persistence test, lost iv', () async {
-      FlutterSecureStorage.setMockInitialValues(
-        {
-          'cipher_storage_key': cipherStorageKey,
-        },
-      );
+      FlutterSecureStorage.setMockInitialValues({
+        'cipher_storage_key': cipherStorageKey,
+      });
 
       final cipherStorage = CipherStorage();
       await expectLater(cipherStorage.init, throwsStateError);

@@ -26,10 +26,7 @@ class Storage {
     WidgetsFlutterBinding.ensureInitialized();
 
     _database = await openDatabase(
-      join(
-        await getDatabasesPath(),
-        dbName,
-      ),
+      join(await getDatabasesPath(), dbName),
       onCreate: _onCreate,
       onUpgrade: _onUpgrade,
       onDowngrade: _onDowngrade,
@@ -43,19 +40,13 @@ class Storage {
   Future<void> reset([String dbName = _storageFileName]) async {
     WidgetsFlutterBinding.ensureInitialized();
 
-    await deleteDatabase(
-      join(
-        await getDatabasesPath(),
-        dbName,
-      ),
-    );
+    await deleteDatabase(join(await getDatabasesPath(), dbName));
 
     _log.finest('reset');
   }
 
   Future<void> _onCreate(Database db, int _) async {
-    await db.execute(
-      '''
+    await db.execute('''
         CREATE TABLE storage (
           domain TEXT NOT NULL,
           key TEXT NOT NULL,
@@ -63,13 +54,10 @@ class Storage {
           iv TEXT NOT NULL,
           PRIMARY KEY (domain, key)
         );
-      ''',
-    );
-    await db.execute(
-      '''
+      ''');
+    await db.execute('''
         CREATE INDEX storage_domain_index ON storage(domain);
-      ''',
-    );
+      ''');
 
     _log.finest('database created');
   }
@@ -99,7 +87,8 @@ class Storage {
 
   /// Clear storage: all records in one domain
   Future<void> clearDomain([String? domain = defaultDomain]) async {
-    final query = '''
+    final query =
+        '''
       DELETE FROM storage WHERE domain = '$domain';
     ''';
 
@@ -118,13 +107,7 @@ class Storage {
     String domain = defaultDomain,
     bool overwrite = true,
   }) async {
-    return setDomain(
-      {
-        key: value,
-      },
-      domain: domain,
-      overwrite: overwrite,
-    );
+    return setDomain({key: value}, domain: domain, overwrite: overwrite);
   }
 
   /// Write the key-value pair map. [pairs] will be written in [domain].
@@ -154,7 +137,8 @@ class Storage {
     });
 
     final conflictClause = overwrite ? 'REPLACE' : 'IGNORE';
-    final query = '''
+    final query =
+        '''
       INSERT OR $conflictClause INTO storage (domain, key, value, iv) VALUES $values;
     ''';
 
@@ -162,10 +146,7 @@ class Storage {
   }
 
   /// Delete by [key] from [domain].
-  Future<void> delete(
-    String key, {
-    String domain = defaultDomain,
-  }) async {
+  Future<void> delete(String key, {String domain = defaultDomain}) async {
     return deleteDomain([key], domain: domain);
   }
 
@@ -191,7 +172,8 @@ class Storage {
         return result;
       });
 
-      final query = '''
+      final query =
+          '''
         DELETE FROM storage WHERE domain = '$domain' AND ($andClause)
       ''';
 
@@ -205,11 +187,9 @@ class Storage {
     StorageValue? defaultValue,
     String domain = defaultDomain,
   }) async {
-    final list = await _database.rawQuery(
-      '''
+    final list = await _database.rawQuery('''
         SELECT value, iv FROM storage WHERE domain = '$domain' and key = '$key' LIMIT 1;
-      ''',
-    );
+      ''');
 
     return list.isNotEmpty
         ? StorageValue(
@@ -223,11 +203,9 @@ class Storage {
   Future<Map<String, StorageValue>> getDomain({
     String domain = defaultDomain,
   }) async {
-    final list = await _database.rawQuery(
-      '''
+    final list = await _database.rawQuery('''
         SELECT key, value, iv FROM storage WHERE domain = '$domain';
-      ''',
-    );
+      ''');
 
     return {
       // There is no way to write null in these fields
@@ -241,14 +219,10 @@ class Storage {
   }
 
   /// Get keys from [domain]
-  Future<List<String>> getDomainKeys({
-    String domain = defaultDomain,
-  }) async {
-    final list = await _database.rawQuery(
-      '''
+  Future<List<String>> getDomainKeys({String domain = defaultDomain}) async {
+    final list = await _database.rawQuery('''
       SELECT key FROM storage WHERE domain = '$domain';
-    ''',
-    );
+    ''');
 
     return [
       // There is no way to write null in these fields

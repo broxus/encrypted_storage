@@ -35,16 +35,10 @@ abstract class AbstractStorage {
   });
 
   /// Delete by [key] from [domain].
-  Future<void> delete(
-    String key, {
-    String domain = defaultDomain,
-  });
+  Future<void> delete(String key, {String domain = defaultDomain});
 
   /// Delete by [keys] from [domain].
-  Future<void> deleteDomain(
-    List<String> keys, {
-    String domain = defaultDomain,
-  });
+  Future<void> deleteDomain(List<String> keys, {String domain = defaultDomain});
 
   /// Get value by [key] and [domain]. If not found will return [defaultValue]
   Future<String?> get(
@@ -54,12 +48,8 @@ abstract class AbstractStorage {
   });
 
   /// Get key-value pair map from [domain].
-  Future<Map<String, String>> getDomain({
-    String domain = defaultDomain,
-  });
+  Future<Map<String, String>> getDomain({String domain = defaultDomain});
 
   /// Get keys from [domain]
-  Future<List<String>> getDomainKeys({
-    String domain = defaultDomain,
-  });
+  Future<List<String>> getDomainKeys({String domain = defaultDomain});
 }
