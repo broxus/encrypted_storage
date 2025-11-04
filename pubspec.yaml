@@ -41,7 +41,7 @@ melos:
 
     codegen:
       description: Generate code for all packages
-      exec: "flutter packages pub run build_runner build --delete-conflicting-outputs"
+      exec: "flutter packages pub run build_runner build --delete-conflicting-outputs && dart format lib/encrypted_storage.module.dart"
       failFast: true
       packageFilters:
         dependsOn: "build_runner"
