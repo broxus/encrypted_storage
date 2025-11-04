@@ -11,6 +11,33 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 Packages with breaking changes:
 
+ - [`encrypted_storage` - `v0.1.4-dev.1`](#encrypted_storage---v014-dev1)
+
+Packages with other changes:
+
+ - There are no other changes in this release.
+
+---
+
+#### `encrypted_storage` - `v0.1.4-dev.1`
+
+ - **BREAKING** **REFACTOR**: update storage initialization to require databasesPath parameter; move `getDefaultDatabasesPath` to `EncryptedStorage` class; adjust tests;. ([4d4bbdb0](https://github.com/broxus/encrypted_storage/commit/4d4bbdb0ab4bf3a92eff9ae1929d884119b09fbd))
+
+## 0.1.4-dev.1
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **REFACTOR**: update storage initialization to require databasesPath parameter; move `getDefaultDatabasesPath` to `EncryptedStorage` class; adjust tests;. ([4d4bbdb0](https://github.com/broxus/encrypted_storage/commit/4d4bbdb0ab4bf3a92eff9ae1929d884119b09fbd))
+
+
+## 2025-11-04
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
  - There are no breaking changes in this release.
 
 Packages with other changes:
