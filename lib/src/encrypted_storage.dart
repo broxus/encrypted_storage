@@ -3,6 +3,7 @@ import 'package:encrypted_storage/src/cipher_storage.dart';
 import 'package:encrypted_storage/src/encrypt_helper.dart';
 import 'package:encrypted_storage/src/storage.dart';
 import 'package:injectable/injectable.dart';
+import 'package:sqflite/sqflite.dart';
 
 /// {@template encrypted_storage}
 /// Encrypted storage
@@ -18,6 +19,8 @@ class EncryptedStorage implements AbstractStorage {
 
   static const String _storageFileName = 'encrypted_storage.db';
 
+  static Future<String> getDefaultDatabasesPath() => getDatabasesPath();
+
   /// Init encrypted storage
   Future<void> init({
     String dbName = _storageFileName,
@@ -25,7 +28,10 @@ class EncryptedStorage implements AbstractStorage {
   }) async {
     await Future.wait([
       _cipherStorage.init(),
-      _storage.init(dbName: dbName, databasesPath: databasesPath),
+      _storage.init(
+        dbName: dbName,
+        databasesPath: databasesPath ?? await getDefaultDatabasesPath(),
+      ),
     ]);
     _encryptHelper = EncryptHelper(_cipherStorage);
   }
@@ -36,7 +42,10 @@ class EncryptedStorage implements AbstractStorage {
     String dbName = _storageFileName,
     String? databasesPath,
   }) async {
-    return _storage.reset(dbName: dbName, databasesPath: databasesPath);
+    return _storage.reset(
+      dbName: dbName,
+      databasesPath: databasesPath ?? await getDefaultDatabasesPath(),
+    );
   }
 
   @override

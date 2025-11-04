@@ -21,17 +21,15 @@ class Storage {
 
   static const _storageFileName = 'storage.db';
 
-  static Future<String> getDefaultDatabasesPath() => getDatabasesPath();
-
   /// Init storage
   Future<void> init({
+    required String databasesPath,
     String dbName = _storageFileName,
-    String? databasesPath,
   }) async {
     WidgetsFlutterBinding.ensureInitialized();
 
     _database = await openDatabase(
-      join(databasesPath ?? await getDefaultDatabasesPath(), dbName),
+      join(databasesPath, dbName),
       onCreate: _onCreate,
       onUpgrade: _onUpgrade,
       onDowngrade: _onDowngrade,
@@ -43,14 +41,12 @@ class Storage {
 
   /// Reset storage
   Future<void> reset({
+    required String databasesPath,
     String dbName = _storageFileName,
-    String? databasesPath,
   }) async {
     WidgetsFlutterBinding.ensureInitialized();
 
-    await deleteDatabase(
-      join(databasesPath ?? await getDefaultDatabasesPath(), dbName),
-    );
+    await deleteDatabase(join(databasesPath, dbName));
 
     _log.finest('reset');
   }

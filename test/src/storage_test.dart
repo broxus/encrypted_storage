@@ -39,12 +39,19 @@ void main() {
   });
 
   group('Storage db tests', () {
-    setUp(() {
-      Storage().reset();
+    late final String databasesPath;
+
+    setUpAll(() async {
+      databasesPath = await getDatabasesPath();
     });
+
+    setUp(() {
+      Storage().reset(databasesPath: databasesPath);
+    });
+
     test('init and check empty', () async {
       final storage = Storage();
-      await storage.init();
+      await storage.init(databasesPath: databasesPath);
       await storage.clearAll();
       expect(await storage.getDomain(), isEmpty);
       expect(await storage.getDomain(domain: testDomainName0), isEmpty);
@@ -52,7 +59,7 @@ void main() {
 
     test('signle pair set and check in default domain', () async {
       final storage = Storage();
-      await storage.init();
+      await storage.init(databasesPath: databasesPath);
       await storage.clearAll();
       expect(await storage.getDomain(), isEmpty);
 
@@ -62,7 +69,7 @@ void main() {
 
     test('signle pair set, update and check in default domain', () async {
       final storage = Storage();
-      await storage.init();
+      await storage.init(databasesPath: databasesPath);
       await storage.clearAll();
       expect(await storage.getDomain(), isEmpty);
 
@@ -80,7 +87,7 @@ void main() {
 
     test('signle pair set and delete in default domain', () async {
       final storage = Storage();
-      await storage.init();
+      await storage.init(databasesPath: databasesPath);
       await storage.clearAll();
       expect(await storage.getDomain(), isEmpty);
 
@@ -104,7 +111,7 @@ void main() {
 
     test('signle pair set, NOT update and check in default domain', () async {
       final storage = Storage();
-      await storage.init();
+      await storage.init(databasesPath: databasesPath);
       await storage.clearAll();
       expect(await storage.getDomain(), isEmpty);
 
@@ -120,7 +127,7 @@ void main() {
 
     test('signle check default value in default domain', () async {
       final storage = Storage();
-      await storage.init();
+      await storage.init(databasesPath: databasesPath);
       await storage.clearAll();
       expect(await storage.getDomain(), isEmpty);
 
@@ -136,7 +143,7 @@ void main() {
 
     test('signle pair set and check in custom domain', () async {
       final storage = Storage();
-      await storage.init();
+      await storage.init(databasesPath: databasesPath);
       await storage.clearAll();
       expect(await storage.getDomain(), isEmpty);
       expect(await storage.getDomain(domain: testDomainName0), isEmpty);
@@ -155,7 +162,7 @@ void main() {
 
     test('signle check default value in custom domain', () async {
       final storage = Storage();
-      await storage.init();
+      await storage.init(databasesPath: databasesPath);
       await storage.clearAll();
       expect(await storage.getDomain(), isEmpty);
       expect(await storage.getDomain(domain: testDomainName0), isEmpty);
@@ -173,7 +180,7 @@ void main() {
 
     test('separated domain cleaning', () async {
       final storage = Storage();
-      await storage.init();
+      await storage.init(databasesPath: databasesPath);
       await storage.clearAll();
       expect(await storage.getDomain(), isEmpty);
       expect(await storage.getDomain(domain: testDomainName0), isEmpty);
@@ -199,7 +206,7 @@ void main() {
 
     test('multiple pairs set and check in default domain', () async {
       final storage = Storage();
-      await storage.init();
+      await storage.init(databasesPath: databasesPath);
       await storage.clearAll();
       expect(await storage.getDomain(), isEmpty);
       expect(await storage.getDomainKeys(), isEmpty);
@@ -222,7 +229,7 @@ void main() {
 
     test('multiple pairs set, update and check in default domain', () async {
       final storage = Storage();
-      await storage.init();
+      await storage.init(databasesPath: databasesPath);
       await storage.clearAll();
       expect(await storage.getDomain(), isEmpty);
 
@@ -236,7 +243,7 @@ void main() {
       'multiple pairs set, NOT update and check in default domain',
       () async {
         final storage = Storage();
-        await storage.init();
+        await storage.init(databasesPath: databasesPath);
         await storage.clearAll();
         expect(await storage.getDomain(), isEmpty);
 
@@ -251,7 +258,7 @@ void main() {
       'multiple pairs set, update, append and check in default domain',
       () async {
         final storage = Storage();
-        await storage.init();
+        await storage.init(databasesPath: databasesPath);
         await storage.clearAll();
         expect(await storage.getDomain(), isEmpty);
 
@@ -273,7 +280,7 @@ void main() {
       'multiple pairs set, append and partially delete in default domain',
       () async {
         final storage = Storage();
-        await storage.init();
+        await storage.init(databasesPath: databasesPath);
         await storage.clearAll();
         expect(await storage.getDomain(), isEmpty);
 
@@ -293,7 +300,7 @@ void main() {
       'huge pair list delete test (query splitting) in default domain',
       () async {
         final storage = Storage();
-        await storage.init();
+        await storage.init(databasesPath: databasesPath);
         await storage.clearAll();
         expect(await storage.getDomain(), isEmpty);
 
