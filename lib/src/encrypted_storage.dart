@@ -19,15 +19,24 @@ class EncryptedStorage implements AbstractStorage {
   static const String _storageFileName = 'encrypted_storage.db';
 
   /// Init encrypted storage
-  Future<void> init([String dbName = _storageFileName]) async {
-    await Future.wait([_cipherStorage.init(), _storage.init(dbName)]);
+  Future<void> init({
+    String dbName = _storageFileName,
+    String? databasesPath,
+  }) async {
+    await Future.wait([
+      _cipherStorage.init(),
+      _storage.init(dbName: dbName, databasesPath: databasesPath),
+    ]);
     _encryptHelper = EncryptHelper(_cipherStorage);
   }
 
   /// Reset storage
   /// @visibleForTesting
-  Future<void> reset([String dbName = _storageFileName]) async {
-    return _storage.reset(dbName);
+  Future<void> reset({
+    String dbName = _storageFileName,
+    String? databasesPath,
+  }) async {
+    return _storage.reset(dbName: dbName, databasesPath: databasesPath);
   }
 
   @override
