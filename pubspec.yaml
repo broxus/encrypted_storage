@@ -4,14 +4,14 @@ version: 0.1.3
 repository: https://github.com/broxus/encrypted_storage
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: '>=3.9.0 <4.0.0'
 
 dependencies:
   collection: ^1.18.0
   encrypt: ^5.0.3
   flutter:
     sdk: flutter
-  flutter_secure_storage: ^9.0.0
+  flutter_secure_storage: ^10.0.0-beta.4
   injectable: ^2.4.1
   logging: ^1.2.0
   path: ^1.9.0
@@ -26,8 +26,60 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   injectable_generator: ^2.6.1
-  melos: ^6.0.0
+  melos: ^7.3.0
   mocktail: ^1.0.3
   path_provider_platform_interface: ^2.1.2
   plugin_platform_interface: ^2.1.8
   sqflite_common_ffi: ^2.3.3
+
+melos:
+  useRootAsPackage: true
+  scripts:
+    build_and_test:
+      description: GA main script
+      run: bash scripts/build_and_test.sh
+
+    codegen:
+      description: Generate code for all packages
+      exec: "flutter packages pub run build_runner build --delete-conflicting-outputs"
+      failFast: true
+      packageFilters:
+        dependsOn: "build_runner"
+
+    analyze:
+      description: Analyze a specific package in this project.
+      exec: flutter analyze . && flutter pub run dart_code_metrics:metrics analyze lib
+      failFast: true
+      packageFilters:
+        dependsOn: "dart_code_metrics"
+
+    check-format:
+      description: Check the format of a specific package in this project.
+      exec: dart format --set-exit-if-changed .
+      failFast: true
+
+    test:
+      description: Run Flutter tests for a specific package in this project.
+      exec: "flutter test -j 1 test"
+      failFast: true
+      packageFilters:
+        flutter: true
+        dirExists: test
+
+    check-all:
+      description: Prepare to commit by checking all things
+      run: melos check-format && melos analyze && melos test
+      failFast: true
+
+    git-check:
+      run: bash scripts/git-check.sh
+      description: Check if some code changed during build
+
+  command:
+    clean:
+      hooks:
+        post: bash scripts/clean.sh
+
+    version:
+      hooks:
+        preCommit: melos bs && git add --all
