@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2026-01-16
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`encrypted_storage` - `v0.1.5`](#encrypted_storage---v015)
+
+---
+
+#### `encrypted_storage` - `v0.1.5`
+
+ - **FEAT**: update CipherStorage initialization to accept FlutterSecureStorage parameter. ([dd5f2131](https://github.com/broxus/encrypted_storage/commit/dd5f21311e043556680ff85fe8e6f64009727c96))
+
+## 0.1.5
+
+ - **FEAT**: update CipherStorage initialization to accept FlutterSecureStorage parameter. ([dd5f2131](https://github.com/broxus/encrypted_storage/commit/dd5f21311e043556680ff85fe8e6f64009727c96))
+
+
 ## 2025-11-05
 
 ### Changes
