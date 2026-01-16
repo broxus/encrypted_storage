@@ -18,8 +18,8 @@ class CipherStorage {
   late final IV _iv;
 
   /// Init ciper storage
-  Future<void> init() async {
-    _storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
+  Future<void> init({FlutterSecureStorage? secureStorage}) async {
+    _storage = secureStorage ?? const FlutterSecureStorage();
 
     final rows = await _storage.readAll();
     final key = rows[_keyKey];
@@ -50,9 +50,6 @@ class CipherStorage {
 
   /// Get initialization vector
   IV get iv => _iv;
-
-  AndroidOptions _getAndroidOptions() =>
-      const AndroidOptions(encryptedSharedPreferences: true);
 
   /// Generate key from base64
   static Key keyFromBase64(String key) => Key.fromBase64(key);

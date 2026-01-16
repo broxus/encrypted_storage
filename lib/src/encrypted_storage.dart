@@ -2,6 +2,7 @@ import 'package:encrypted_storage/src/abstract_storage.dart';
 import 'package:encrypted_storage/src/cipher_storage.dart';
 import 'package:encrypted_storage/src/encrypt_helper.dart';
 import 'package:encrypted_storage/src/storage.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -25,9 +26,10 @@ class EncryptedStorage implements AbstractStorage {
   Future<void> init({
     String dbName = _storageFileName,
     String? databasesPath,
+    FlutterSecureStorage? secureStorage,
   }) async {
     await Future.wait([
-      _cipherStorage.init(),
+      _cipherStorage.init(secureStorage: secureStorage),
       _storage.init(
         dbName: dbName,
         databasesPath: databasesPath ?? await getDefaultDatabasesPath(),
