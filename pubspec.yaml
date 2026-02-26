@@ -23,8 +23,10 @@ dev_dependencies:
       url: https://github.com/broxus/flutter_templates.git
       ref: broxus_flutter_analysis-v1.0.0
   build_runner: ^2.4.9
+  commitlint_cli: ^0.8.1
   flutter_test:
     sdk: flutter
+  husky: ^0.1.7
   injectable_generator: ^2.6.1
   melos: ^7.3.0
   mocktail: ^1.0.3
