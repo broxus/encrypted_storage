@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2026-04-13
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`encrypted_storage` - `v0.1.6`](#encrypted_storage---v016)
+
+---
+
+#### `encrypted_storage` - `v0.1.6`
+
+ - **FEAT**: update Flutter version to 3.41.6. ([7fb4fda1](https://github.com/broxus/encrypted_storage/commit/7fb4fda1489137e3538d5a686050f4e47646764e))
+
+## 0.1.6
+
+ - **FEAT**: update Flutter version to 3.41.6. ([7fb4fda1](https://github.com/broxus/encrypted_storage/commit/7fb4fda1489137e3538d5a686050f4e47646764e))
+
+
 ## 2026-01-16
 
 ### Changes
