@@ -28,7 +28,7 @@ dev_dependencies:
     sdk: flutter
   husky: ^0.1.7
   injectable_generator: ^2.6.1
-  melos: ^7.3.0
+  melos: ^7.5.1
   mocktail: ^1.0.3
   path_provider_platform_interface: ^2.1.2
   plugin_platform_interface: ^2.1.8
